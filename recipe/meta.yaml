@@ -1,0 +1,45 @@
+{% set name = "contextvars" %}
+{% set version = "2.4" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "f38c908aaa59c14335eeea12abea5f443646216c4e29380d7bf34d2018e2c39e" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
+  noarch: python
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - pip
+  run:
+    - python >=3,<3.7
+    - immutables >=0.9
+
+test:
+  imports:
+    - {{ name }}
+
+about:
+  home: http://github.com/MagicStack/contextvars
+  license: Apache
+  license_family: APACHE
+  license_file: 'LICENSE'
+  summary: PEP 567 Backport
+  description: "Implements a backport of Python 3.7 contextvar module (see PEP 567)"
+  dev_url: 'https://github.com/MagicStack/contextvars'
+
+extra:
+  recipe-maintainers:
+    - nicoddemus
