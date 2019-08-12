@@ -14,14 +14,13 @@ source:
   '{{ hash_type }}': '{{ hash_value }}'
 
 build:
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
   noarch: python
 
 requirements:
-  build:
+  host:
     - python
-    - setuptools
     - pip
   run:
     - python >=3,<3.7
