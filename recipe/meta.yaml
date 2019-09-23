@@ -5,18 +5,17 @@
 {% set hash_value = "f38c908aaa59c14335eeea12abea5f443646216c4e29380d7bf34d2018e2c39e" %}
 
 package:
-  name: '{{ name|lower }}'
-  version: '{{ version }}'
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
-  '{{ hash_type }}': '{{ hash_value }}'
+  {{ hash_type }}: {{ hash_value }}
 
 build:
+  noarch: python
   number: 1
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
-  noarch: python
 
 requirements:
   host:
@@ -34,11 +33,7 @@ about:
   home: http://github.com/MagicStack/contextvars
   license: Apache
   license_family: APACHE
-  license_file: 'LICENSE'
+  license_file: LICENSE
   summary: PEP 567 Backport
-  description: "Implements a backport of Python 3.7 contextvar module (see PEP 567)"
-  dev_url: 'https://github.com/MagicStack/contextvars'
-
-extra:
-  recipe-maintainers:
-    - nicoddemus
+  description: Implements a backport of Python 3.7 contextvar module (see PEP 567)
+  dev_url: https://github.com/MagicStack/contextvars
